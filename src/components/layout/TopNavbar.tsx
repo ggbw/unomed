@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Bell, ChevronDown, User, Activity } from "lucide-react";
+import { Bell, ChevronDown, User, Activity, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 interface NavItem {
   label: string;
@@ -62,13 +64,16 @@ const navItems: NavItem[] = [
 
 export function TopNavbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const location = useLocation();
   const navRef = useRef<HTMLDivElement>(null);
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setOpenDropdown(null);
+        setShowUserMenu(false);
       }
     }
     document.addEventListener("mousedown", handleClick);
@@ -80,10 +85,14 @@ export function TopNavbar() {
     return item.children?.some((c) => location.pathname.startsWith(c.path)) ?? false;
   };
 
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Signed out successfully");
+  };
+
   return (
     <nav ref={navRef} className="bg-nav text-nav-foreground shadow-lg z-50 relative">
       <div className="flex items-center justify-between px-4 h-14">
-        {/* Logo & Name */}
         <Link to="/" className="flex items-center gap-2 shrink-0">
           <div className="w-8 h-8 rounded-lg bg-nav-active flex items-center justify-center">
             <Activity className="w-5 h-5 text-nav-foreground" />
@@ -91,7 +100,6 @@ export function TopNavbar() {
           <span className="font-semibold text-lg hidden sm:block">ClinicPro</span>
         </Link>
 
-        {/* Nav Items */}
         <div className="flex items-center gap-0.5 overflow-x-auto">
           {navItems.map((item) => (
             <div key={item.label} className="relative">
@@ -136,14 +144,32 @@ export function TopNavbar() {
           ))}
         </div>
 
-        {/* Right side */}
         <div className="flex items-center gap-3 shrink-0">
           <button className="relative p-2 rounded-full hover:bg-nav-active/20 transition-colors">
             <Bell className="w-5 h-5" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-nav-active rounded-full" />
           </button>
-          <div className="w-8 h-8 rounded-full bg-nav-active/30 flex items-center justify-center">
-            <User className="w-4 h-4" />
+          <div className="relative">
+            <button
+              onClick={() => setShowUserMenu(!showUserMenu)}
+              className="w-8 h-8 rounded-full bg-nav-active/30 flex items-center justify-center hover:bg-nav-active/50 transition-colors"
+            >
+              <User className="w-4 h-4" />
+            </button>
+            {showUserMenu && (
+              <div className="absolute right-0 top-full mt-2 bg-nav-dropdown rounded-md shadow-xl min-w-[200px] py-1 z-50">
+                <div className="px-4 py-2 border-b border-nav-active/20">
+                  <p className="text-xs text-nav-foreground/70">Signed in as</p>
+                  <p className="text-sm font-medium truncate">{user?.email}</p>
+                </div>
+                <button
+                  onClick={handleSignOut}
+                  className="w-full flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-nav-active/20 text-nav-foreground"
+                >
+                  <LogOut className="w-4 h-4" /> Sign Out
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
