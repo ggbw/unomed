@@ -9,6 +9,14 @@ import Dashboard from "./pages/Dashboard";
 import PatientList from "./pages/patients/PatientList";
 import InvoiceList from "./pages/invoices/InvoiceList";
 import InvoiceForm from "./pages/invoices/InvoiceForm";
+import OrganisationPage from "./pages/master/OrganisationPage";
+import ServicesPage from "./pages/master/ServicesPage";
+import ItemsPage from "./pages/master/ItemsPage";
+import ConsultantsPage from "./pages/master/ConsultantsPage";
+import SchemesPage from "./pages/master/SchemesPage";
+import DiagnosesPage from "./pages/master/DiagnosesPage";
+import InvestigationsPage from "./pages/master/InvestigationsPage";
+import ProceduresPage from "./pages/master/ProceduresPage";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import AuthPage from "./pages/AuthPage";
 import NotFound from "./pages/NotFound";
@@ -48,14 +56,14 @@ const App = () => (
               <Route path="/referrals" element={<PlaceholderPage />} />
               <Route path="/sick-leaves" element={<PlaceholderPage />} />
               <Route path="/appointments" element={<PlaceholderPage />} />
-              <Route path="/master/organisation" element={<PlaceholderPage />} />
-              <Route path="/master/services" element={<PlaceholderPage />} />
-              <Route path="/master/items" element={<PlaceholderPage />} />
-              <Route path="/master/consultants" element={<PlaceholderPage />} />
-              <Route path="/master/schemes" element={<PlaceholderPage />} />
-              <Route path="/master/diagnoses" element={<PlaceholderPage />} />
-              <Route path="/master/investigations" element={<PlaceholderPage />} />
-              <Route path="/master/procedures" element={<PlaceholderPage />} />
+              <Route path="/master/organisation" element={<OrganisationPage />} />
+              <Route path="/master/services" element={<ServicesPage />} />
+              <Route path="/master/items" element={<ItemsPage />} />
+              <Route path="/master/consultants" element={<ConsultantsPage />} />
+              <Route path="/master/schemes" element={<SchemesPage />} />
+              <Route path="/master/diagnoses" element={<DiagnosesPage />} />
+              <Route path="/master/investigations" element={<InvestigationsPage />} />
+              <Route path="/master/procedures" element={<ProceduresPage />} />
               <Route path="/stock/items" element={<PlaceholderPage />} />
               <Route path="/stock/received" element={<PlaceholderPage />} />
               <Route path="/stock/dispensed" element={<PlaceholderPage />} />

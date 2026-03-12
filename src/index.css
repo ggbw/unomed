@@ -44,14 +44,15 @@
     --nav-dropdown: 160 40% 20%;
     --nav-active: 164 70% 48%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 231 48% 28%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 164 70% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 231 48% 35%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 231 40% 22%;
+    --sidebar-ring: 164 70% 48%;
+    --sidebar-muted: 231 30% 60%;
   }
 }
 
