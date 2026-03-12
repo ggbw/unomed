@@ -42,10 +42,10 @@ export default function MasterDataPage({ title, table, columns }: MasterDataPage
   const upsertMutation = useMutation({
     mutationFn: async (values: Record<string, any>) => {
       if (editing) {
-        const { error } = await supabase.from(table).update(values).eq("id", editing.id);
+        const { error } = await supabase.from(table).update(values as any).eq("id", editing.id);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from(table).insert(values);
+        const { error } = await supabase.from(table).insert(values as any);
         if (error) throw error;
       }
     },
